@@ -33,7 +33,12 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ProductDto> get(@PathVariable Long id) {
-        return ResponseEntity.ok(productService.getProduct(id));
+        try{
+            return ResponseEntity.ok(productService.getProduct(id));
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+
     }
 
     @PutMapping("/{id}/stock")
