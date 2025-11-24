@@ -52,7 +52,7 @@ public class ProductController {
     public ResponseEntity<ReserveResponse> reserve(@PathVariable Long id, @RequestBody ReserveRequest req) {
         boolean ok = productService.reserveStock(id, req.quantity());
         if (ok) return ResponseEntity.ok(new ReserveResponse(true, "reserved"));
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(new ReserveResponse(false, "insufficient_stock"));
+        return ResponseEntity.status(HttpStatus.OK).body(new ReserveResponse(false, "insufficient_stock"));
     }
 
     // INTERNAL → release stock (compensation)
